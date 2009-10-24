@@ -3,19 +3,12 @@ class URI::Authority {
     has $.host;
     has $.port;
 
-    multi method new($self: Str $lol ) {
-        say 'in string new';
-        $self.bless(*, host => $lol);
+    multi method new(Str $authority) {
+        self.bless(*, host => $authority);
     }
 
-    multi method new($self: Str :$host, Str :$userinfo, Str :$port) {
-        say 'in hash new';
-        $self.bless(*, host => $host, userinfo => $userinfo, port => $port );
-    }
-
-    submethod BUILD (Str :$host) {
-        say 'in URI::A BUILD';
-        $!host = $host;
+    multi method new(:$host, :$userinfo, :$port) {
+        self.bless(*, :$host, :$userinfo, :$port );
     }
 
 }

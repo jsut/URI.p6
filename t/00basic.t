@@ -22,7 +22,7 @@ my $uri2 = URI.new(
 );
 
 is($uri2.scheme, q[http],q[scheme is http]);
-is($uri2.authority, q[localhost],q[authority is localhost]);
+isa_ok($uri2.authority, URI::Authority,q[authority is localhost]);
 is($uri2.path, q[/],q[path is undefined]);
 is($uri2.query, undef,q[query is undefined]);
 is($uri2.fragment, undef,q[fragment is undefined]);
