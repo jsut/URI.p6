@@ -7,8 +7,10 @@ use URI::Authority;
 
 
 
-my $uri = URI.new('http://www.haha.com');
+my $uri = URI.new('http://www.haha.com#lols');
 say '-' ~ $uri ~ '-';
 say '-' ~ $uri.scheme ~ '-';
+say '-' ~ $uri.opaque ~ '-';
+say '-' ~ $uri.fragment ~ '-';
 say '';
 

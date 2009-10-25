@@ -18,11 +18,18 @@ class URI {
         return self.bless(*,:$scheme,:$opaque,:$fragment);
     }
 
+    #
+    # this assumes that the uri is properly encoded (among other things)
+    #
     method parse_uri (Str $uri) {
         my ($scheme,@rest) = $uri.split(':');
-        say $scheme;
+        my @parts = @rest.join(':').split('#');
+        my $opaque = shift @parts;
+        my $fragment = @parts.join('#');
         return (
-            scheme => $scheme,
+            scheme   => $scheme,
+            opaque   => $opaque,
+            fragment => $fragment,
         );
     }
 

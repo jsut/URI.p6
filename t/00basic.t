@@ -1,7 +1,7 @@
 use v6;
 use Test;
 
-plan 8;
+plan 10;
 
 use URI;
 ok(1,q[URI.pm actually loads!]);
@@ -25,4 +25,7 @@ ok(1,q[URI.pm actually loads!]);
 {
     my $uri = URI.new('http://somedomain.com/path/to/file/?a=b&a=c&d=d#top');
     is($uri.scheme, 'http', 'String constructor parses scheme correctly');
+    is($uri.opaque, '//somedomain.com/path/to/file/?a=b&a=c&d=d',
+                    'String constructor parses opaque correctly');
+    is($uri.fragment, 'top', 'String constructor parses fragment correctly');
 }
