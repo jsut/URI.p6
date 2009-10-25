@@ -1,0 +1,9 @@
+The code found here probably isn't an example of 'Good' Perl 6 code.  It is
+however an example of someone that knows Perl 5 reasonable well, attempting to
+do something in Perl 6.
+
+What I'm attempting to do is implement URI.pm from CPAN, more or less.
+Probably less.  I'm using rfc3986 as a guide, along with the URI.pm
+documentation.
+
+Adam
