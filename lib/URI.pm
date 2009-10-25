@@ -1,29 +1,29 @@
-use URI::Authority;
-
 class URI {
     has $.scheme is rw;
-    has URI::Authority $.authority is rw;
-    has $.path is rw;
-    has $.query is rw;
+    has $.opaque is rw;
     has $.fragment is rw;
-    has $!type;
 
-    multi method new (Str $url) {
-        return self.bless(*,path => $url);
+    multi method new (Str $uri) {
+        my %h = %.parse_uri($uri);
+        #
+        # at this point it would make sense to look to see if there is a
+        # subclass of URI that implements this scheme (by looking for
+        # URI::<scheme>, and then making one of them, instead of a generic
+        # URI object
+        #
+        return self.bless(*,|%h);
     }
 
-    multi method new (:$scheme, URI::Authority :$authority, :$path, :$query, :$fragment) {
-        return self.bless(*,:$scheme,:$authority,:$path,:$query,:$fragment);
+    multi method new (:$scheme, :$opaque, :$fragment) {
+        return self.bless(*,:$scheme,:$opaque,:$fragment);
     }
 
-    multi method new (:$scheme, :$authority, :$path, :$query, :$fragment) {
-        return self.bless(*,
-            :$scheme,
-            authority => URI::Authority.new(:$authority),
-            :$path,
-            :$query,
-            :$fragment,
-        )
+    method parse_uri (Str $uri) {
+        my ($scheme,@rest) = $uri.split(':');
+        say $scheme;
+        return (
+            scheme => $scheme,
+        );
     }
 
 }
