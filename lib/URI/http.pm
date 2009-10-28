@@ -7,9 +7,6 @@ use URI::Authority;
 
 class URI::http is URI {
     has URI::Authority $.authority is rw;
-    has $.path is rw;
-    has $.query is rw;
-    has $.fragment is rw;
 
     #
     # i'm not really sure why this constructor has to be here, i would expect
@@ -21,7 +18,7 @@ class URI::http is URI {
     #
     multi method new (Str $uri) {
         my %h = self.parse_uri($uri);
-        return self.bless(*, |%h);
+        return self.new(|%h);
     }
 
     #

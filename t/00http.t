@@ -1,7 +1,7 @@
 use v6;
 use Test;
 
-plan 12;
+plan 16;
 
 use URI::http;
 use URI::Authority;
@@ -33,4 +33,8 @@ ok(1,q[Stuff actually loads!]);
 {
     my $uri = URI::http.new('http://somedomain.com/path/to/file/?a=b&a=c&d=d#top');
     is($uri.scheme, 'http', 'String constructor parses scheme correctly');
+    isa_ok($uri.authority, URI::Authority, q[authority is an URI::Authority object]);
+    is($uri.path, '/path/to/file/', 'String constructor parses scheme correctly');
+    is($uri.query, 'a=b&a=c&d=d', 'String constructor parses scheme correctly');
+    is($uri.fragment, 'top', 'String constructor parses scheme correctly');
 }
